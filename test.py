@@ -24,6 +24,7 @@ grid = [[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
         [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,1,0,0,0,0,0,0],
         [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]]
 
+grid = cv2.imread('harsh_bin_smaller.png')[:,:,0];
 
 maze = astar.getMaze(grid)
 astar.fillPath(maze)
@@ -32,4 +33,4 @@ for i, line in enumerate(maze):
     for j, cell in enumerate(line):
         grid[i][j] = cell.val
 
-cv2.imwrite('astar.jpg',np.array(grid))
+cv2.imwrite('astar.png',np.array(grid))

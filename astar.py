@@ -15,7 +15,7 @@ class Tile:
 
     def setReachable(self):
         self.reachable = True
-        if self.val == 1:
+        if self.val > 30:
             self.reachable = False
 
     def move_cost(self, other):
@@ -65,6 +65,7 @@ class AStar:
         openset = set()
         closedset = set()
         openset.add(current)
+        # print ('{0} {1}'.format(len(openset),len(closedset)))
         while len(openset):
             current = min(openset, key=lambda o:o.g + o.h)
             if current == end:
@@ -87,8 +88,8 @@ class AStar:
 
 def fillPath(maze):
     aStar = AStar(maze)
-    for tile in aStar.search(maze[1][0], maze[-2][-1]):
-        maze[tile.y][tile.x].val = 255
+    for tile in aStar.search(maze[-1][0], maze[0][-1]):
+        maze[tile.y][tile.x].val = 127
 
 def printMaze(maze):
     for row in maze:
