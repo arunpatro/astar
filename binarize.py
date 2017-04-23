@@ -19,4 +19,5 @@ closing = cv2.morphologyEx(thres, cv2.MORPH_CLOSE, kernel,iterations = 10)
 # plt.imshow(closing,cmap='gray')
 # plt.show()
 cv2.imwrite('bin.png',closing)
+cv2.imwrite('bin_small.png',0.2*cv2.resize(closing,(0,0),fx=0.1,fy=0.1))
 
