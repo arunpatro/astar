@@ -2,7 +2,7 @@ import cv2
 import matplotlib.pyplot as plt
 import numpy as np
 
-img = cv2.imread('harsh.jpg');
+img = cv2.imread('raw.jpg');
 rows,cols,ch = img.shape
 pts1 = np.float32([[0,150],[1725,178],[39,1303],[1695,1240]])
 pts2 = np.float32([[0,0],[1500,0],[0,1000],[1500,1000]])
@@ -18,5 +18,5 @@ closing = cv2.morphologyEx(thres, cv2.MORPH_CLOSE, kernel,iterations = 10)
 
 # plt.imshow(closing,cmap='gray')
 # plt.show()
-cv2.imwrite('harsh_bin.png',closing)
+cv2.imwrite('bin.png',closing)
 

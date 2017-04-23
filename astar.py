@@ -132,6 +132,5 @@ if __name__ == "__main__":
 
     maze = getMaze(grid)
     fillPath(maze)
-    # printMaze(maze2)
     for line in maze:
         print [i.val for i in line]
