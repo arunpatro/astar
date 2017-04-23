@@ -17,4 +17,6 @@ kernel = np.ones((5,5),np.uint8)
 closing = cv2.morphologyEx(thres, cv2.MORPH_CLOSE, kernel,iterations = 10)
 
 plt.imshow(closing,cmap='gray')
+cv2.imwrite('binmap.jpg',closing)
 plt.show()
+

@@ -2,12 +2,10 @@
 
 import sys
 from math import sqrt
-import cv2
-import numpy as np
 
 class Tile:
-    def __init__(self, val, x, y):
-        self.val = val
+    def __init__(self, char, x, y):
+        self.char = char
         self.g = 0
         self.h = 0
         self.x = x
@@ -17,7 +15,7 @@ class Tile:
 
     def setReachable(self):
         self.reachable = True
-        if self.val == 255:
+        if self.char in ['-', '+', '|']:
             self.reachable = False
 
     def move_cost(self, other):
@@ -87,55 +85,31 @@ class AStar:
                     node.parent = current
                     openset.add(node)
 
-def fillPath(maze):
-    aStar = AStar(maze)
-    for tile in aStar.search(maze[1][0], maze[-2][-1]):
-        maze[tile.y][tile.x].val = 3
-
-def printMaze(maze):
-    for row in maze:
-        for tile in row:
-            sys.stdout.write(tile.val)
-        print
-
-def getMaze(grid):
+def getMaze():
     maze = []
-    for i ,line in enumerate(grid):
+    for i ,line in enumerate(sys.stdin):
+        line = list (line.rstrip("\r\n"))
         row = []
         for j in range(len(line)):
             row.append(Tile(line[j], j, i))
         maze.append(row)
     return maze
 
+def fillPath(maze):
+    aStar = AStar(maze)
+    for tile in aStar.search(maze[1][0], maze[-2][-1]):
+        maze[tile.y][tile.x].char = "#"
+
+def printMaze(maze):
+    for row in maze:
+        for tile in row:
+            sys.stdout.write(tile.char)
+        print
+
 if __name__ == "__main__":
 
-    grid = [[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
-            [0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,1,0,0,0,0,0,1],
-            [1,0,0,1,0,0,1,0,0,1,1,1,1,0,0,1,1,1,1,1,1,1,0,0,1,0,0,1,1,1,1],
-            [1,0,0,1,0,0,0,0,0,1,0,0,1,0,0,1,0,0,0,0,0,1,0,0,1,0,0,0,0,0,1],
-            [1,0,0,1,1,1,1,1,1,1,0,0,1,0,0,1,0,0,1,0,0,1,0,0,1,1,1,1,0,0,1],
-            [1,0,0,0,0,0,0,0,0,1,0,0,0,0,0,1,0,0,1,0,0,0,0,0,0,0,0,1,0,0,1],
-            [1,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,1,1,1,1,1,1,1,0,0,1],
-            [1,0,0,0,0,0,0,0,0,1,0,0,1,0,0,0,0,0,1,0,0,1,0,0,0,0,0,1,0,0,1],
-            [1,1,1,1,1,1,1,0,0,1,0,0,1,0,0,1,0,0,1,0,0,1,0,0,1,0,0,1,0,0,1],
-            [1,0,0,0,0,0,0,0,0,1,0,0,0,0,0,1,0,0,1,0,0,1,0,0,1,0,0,0,0,0,1],
-            [1,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,1,0,0,1,0,0,1,1,1,1,0,0,1],
-            [1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,1,0,0,1],
-            [1,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,1,1,1,1,0,0,1,0,0,1,0,0,1],
-            [1,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,1,0,0,0,0,0,1,0,0,1,0,0,1],
-            [1,1,1,1,1,1,1,1,1,1,0,0,1,0,0,1,1,1,1,1,1,1,1,1,1,0,0,1,0,0,1],
-            [1,0,0,0,0,0,0,0,0,0,0,0,1,0,0,1,0,0,1,0,0,0,0,0,0,0,0,1,0,0,1],
-            [1,0,0,1,1,1,1,0,0,1,1,1,1,0,0,1,0,0,1,0,0,1,1,1,1,1,1,1,0,0,1],
-            [1,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,1,0,0,1,0,0,0,0,0,1,0,0,1],
-            [1,1,1,1,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,1,0,0,1,0,0,1,0,0,1],
-            [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,1,0,0,0,0,0,0],
-            [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]]
-
-
-    # maze = getMaze()
-    maze = getMaze(grid)
+    maze = getMaze()
     # print(len(maze))
-    # print(maze)
+    print(maze)
     fillPath(maze)
-    for line in maze:
-        print [i.val for i in line]
+    printMaze(maze)
