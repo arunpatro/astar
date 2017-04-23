@@ -2,8 +2,6 @@
 
 import sys
 from math import sqrt
-import cv2
-import numpy as np
 
 class Tile:
     def __init__(self, val, x, y):
@@ -17,7 +15,7 @@ class Tile:
 
     def setReachable(self):
         self.reachable = True
-        if self.val == 255:
+        if self.val == 1:
             self.reachable = False
 
     def move_cost(self, other):
@@ -95,7 +93,7 @@ def fillPath(maze):
 def printMaze(maze):
     for row in maze:
         for tile in row:
-            sys.stdout.write(tile.val)
+            sys.stdout.write(str(tile.val))
         print
 
 def getMaze(grid):
@@ -131,11 +129,8 @@ if __name__ == "__main__":
             [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,1,0,0,0,0,0,0],
             [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]]
 
-
-    # maze = getMaze()
     maze = getMaze(grid)
-    # print(len(maze))
-    # print(maze)
     fillPath(maze)
+    # printMaze(maze2)
     for line in maze:
         print [i.val for i in line]

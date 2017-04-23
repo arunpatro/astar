@@ -23,10 +23,7 @@ grid = [[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
         [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]]
 
 
-# maze = getMaze()
 maze = a.getMaze(grid)
-# print(len(maze))
-# print(maze)
 a.fillPath(maze)
 for line in maze:
     print [i.val for i in line]
