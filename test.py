@@ -1,4 +1,6 @@
-import astar as a
+import astar
+import cv2
+import numpy as np
 
 grid = [[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
         [0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,1,0,0,0,0,0,1],
@@ -23,7 +25,11 @@ grid = [[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
         [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]]
 
 
-maze = a.getMaze(grid)
-a.fillPath(maze)
-for line in maze:
-    print [i.val for i in line]
+maze = astar.getMaze(grid)
+astar.fillPath(maze)
+
+for i, line in enumerate(maze):
+    for j, cell in enumerate(line):
+        grid[i][j] = cell.val
+
+cv2.imwrite('astar.jpg',np.array(grid))
