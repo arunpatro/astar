@@ -1,5 +1,5 @@
 import cv2
-import matplotlib.pyplot as plt
+# import matplotlib.pyplot as plt
 import numpy as np
 
 img = cv2.imread('raw.jpg');
@@ -23,3 +23,5 @@ b = cv2.resize( closing.astype('float'), ( 6, 4 ), interpolation = cv2.INTER_LIN
 cv2.imwrite('bin_tiny.png',b)
 cv2.imwrite('bin_small.png',0.2*cv2.resize(closing,(0,0),fx=0.1,fy=0.1))
 
+# plt.imshow(img)
+# plt.show()
