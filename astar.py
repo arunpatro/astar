@@ -88,7 +88,7 @@ class AStar:
 
 def fillPath(maze):
     aStar = AStar(maze)
-    for tile in aStar.search(maze[2][1], maze[3][5]):
+    for tile in aStar.search(maze[0][0], maze[-1][-1]):
         maze[tile.y][tile.x].val = 127
 
 def printMaze(maze):
