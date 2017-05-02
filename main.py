@@ -17,4 +17,4 @@ cv2.imwrite('astar.png',np.array(grid))
 b = cv2.resize( np.array(grid).astype('float'), ( 1500, 1000 ), interpolation = cv2.INTER_NEAREST )
 cv2.imwrite('astar_big.png',b)
 for i in aStar.search(maze[2][1], maze[3][5]):
-    print (i.x, i.y)
+    print (i.y, i.x)
